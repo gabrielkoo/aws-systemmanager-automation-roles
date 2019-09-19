@@ -1,0 +1,19 @@
+Type: AWS::IAM::Role
+Properties: 
+  AssumeRolePolicyDocument:
+    Version: 2012-10-17
+    Statement:
+    - Effect: Allow
+      Principal:
+        Service:
+        - ssm.amazonaws.com
+      Action: 
+      - sts:AssumeRole
+  Description: ''
+  MaxSessionDuration: 43200
+  Policies:
+  - PolicyName: ''
+    PolicyDocument:
+      Version: 2012-10-17
+      Statement: []
+  RoleName: ''

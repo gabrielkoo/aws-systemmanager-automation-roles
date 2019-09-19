@@ -1,0 +1,390 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Resources:
+  AttachIAMToInstanceRole:
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+        - Action:
+          - sts:AssumeRole
+          Effect: Allow
+          Principal:
+            Service:
+            - ssm.amazonaws.com
+        Version: '2012-10-17'
+      Description: SSM Automation Role for Document AWS-AttachIAMToInstance
+      MaxSessionDuration: '43200'
+      Policies:
+      - PolicyDocument:
+          Statement:
+          - Action: ec2:AssociateIamInstanceProfile
+            Effect: Allow
+            Resource: '*'
+          - Action: iam:GetInstanceProfile
+            Effect: Allow
+            Resource: '*'
+          - Action: ec2:DisassociateIamInstanceProfile
+            Effect: Allow
+            Resource: '*'
+          - Action: iam:AddRoleToInstanceProfile
+            Effect: Allow
+            Resource: '*'
+          - Action: ec2:DescribeIamInstanceProfileAssociations
+            Effect: Allow
+            Resource: '*'
+          - Action: iam:CreateInstanceProfile
+            Effect: Allow
+            Resource: '*'
+          - Action: iam:ListInstanceProfilesForRole
+            Effect: Allow
+            Resource: '*'
+          Version: '2012-10-17'
+        PolicyName: AWS-AttachIAMToInstance
+      RoleName: SSMAutomationAttachIAMToInstanceRole
+    Type: AWS::IAM::Role
+  ConfigureS3BucketLoggingRole:
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+        - Action:
+          - sts:AssumeRole
+          Effect: Allow
+          Principal:
+            Service:
+            - ssm.amazonaws.com
+        Version: '2012-10-17'
+      Description: SSM Automation Role for Document AWS-ConfigureS3BucketLogging
+      MaxSessionDuration: '43200'
+      Policies:
+      - PolicyDocument:
+          Statement:
+          - Action: s3:PutBucketLogging
+            Effect: Allow
+            Resource: '*'
+          Version: '2012-10-17'
+        PolicyName: AWS-ConfigureS3BucketLogging
+      RoleName: SSMAutomationConfigureS3BucketLoggingRole
+    Type: AWS::IAM::Role
+  ConfigureS3BucketVersioningRole:
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+        - Action:
+          - sts:AssumeRole
+          Effect: Allow
+          Principal:
+            Service:
+            - ssm.amazonaws.com
+        Version: '2012-10-17'
+      Description: SSM Automation Role for Document AWS-ConfigureS3BucketVersioning
+      MaxSessionDuration: '43200'
+      Policies:
+      - PolicyDocument:
+          Statement:
+          - Action: s3:PutBucketVersioning
+            Effect: Allow
+            Resource: '*'
+          Version: '2012-10-17'
+        PolicyName: AWS-ConfigureS3BucketVersioning
+      RoleName: SSMAutomationConfigureS3BucketVersioningRole
+    Type: AWS::IAM::Role
+  CreateSnapshotRole:
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+        - Action:
+          - sts:AssumeRole
+          Effect: Allow
+          Principal:
+            Service:
+            - ssm.amazonaws.com
+        Version: '2012-10-17'
+      Description: SSM Automation Role for Document AWS-CreateSnapshot
+      MaxSessionDuration: '43200'
+      Policies:
+      - PolicyDocument:
+          Statement:
+          - Action: ec2:CreateSnapshot
+            Effect: Allow
+            Resource: '*'
+          Version: '2012-10-17'
+        PolicyName: AWS-CreateSnapshot
+      RoleName: SSMAutomationCreateSnapshotRole
+    Type: AWS::IAM::Role
+  DeleteDynamoDbBackupRole:
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+        - Action:
+          - sts:AssumeRole
+          Effect: Allow
+          Principal:
+            Service:
+            - ssm.amazonaws.com
+        Version: '2012-10-17'
+      Description: SSM Automation Role for Document AWS-DeleteDynamoDbBackup
+      MaxSessionDuration: '43200'
+      Policies:
+      - PolicyDocument:
+          Statement:
+          - Action: dynamodb:DeleteBackup
+            Effect: Allow
+            Resource: '*'
+          Version: '2012-10-17'
+        PolicyName: AWS-DeleteDynamoDbBackup
+      RoleName: SSMAutomationDeleteDynamoDbBackupRole
+    Type: AWS::IAM::Role
+  DeleteSnapshotRole:
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+        - Action:
+          - sts:AssumeRole
+          Effect: Allow
+          Principal:
+            Service:
+            - ssm.amazonaws.com
+        Version: '2012-10-17'
+      Description: SSM Automation Role for Document AWS-DeleteSnapshot
+      MaxSessionDuration: '43200'
+      Policies:
+      - PolicyDocument:
+          Statement:
+          - Action: ec2:DeleteSnapshot
+            Effect: Allow
+            Resource: '*'
+          Version: '2012-10-17'
+        PolicyName: AWS-DeleteSnapshot
+      RoleName: SSMAutomationDeleteSnapshotRole
+    Type: AWS::IAM::Role
+  DisablePublicAccessForSecurityGroupRole:
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+        - Action:
+          - sts:AssumeRole
+          Effect: Allow
+          Principal:
+            Service:
+            - ssm.amazonaws.com
+        Version: '2012-10-17'
+      Description: SSM Automation Role for Document AWS-DisablePublicAccessForSecurityGroup
+      MaxSessionDuration: '43200'
+      Policies:
+      - PolicyDocument:
+          Statement:
+          - Action: ec2:RevokeSecurityGroupIngress
+            Effect: Allow
+            Resource: '*'
+          Version: '2012-10-17'
+        PolicyName: AWS-DisablePublicAccessForSecurityGroup
+      RoleName: SSMAutomationDisablePublicAccessForSecurityGroupRole
+    Type: AWS::IAM::Role
+  DisableS3BucketPublicReadWriteRole:
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+        - Action:
+          - sts:AssumeRole
+          Effect: Allow
+          Principal:
+            Service:
+            - ssm.amazonaws.com
+        Version: '2012-10-17'
+      Description: SSM Automation Role for Document AWS-DisableS3BucketPublicReadWrite
+      MaxSessionDuration: '43200'
+      Policies:
+      - PolicyDocument:
+          Statement:
+          - Action: s3:PutBucketAcl
+            Effect: Allow
+            Resource: '*'
+          Version: '2012-10-17'
+        PolicyName: AWS-DisableS3BucketPublicReadWrite
+      RoleName: SSMAutomationDisableS3BucketPublicReadWriteRole
+    Type: AWS::IAM::Role
+  EnableCloudTrailRole:
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+        - Action:
+          - sts:AssumeRole
+          Effect: Allow
+          Principal:
+            Service:
+            - ssm.amazonaws.com
+        Version: '2012-10-17'
+      Description: SSM Automation Role for Document AWS-EnableCloudTrail
+      MaxSessionDuration: '43200'
+      Policies:
+      - PolicyDocument:
+          Statement:
+          - Action: cloudtrail:CreateTrail
+            Effect: Allow
+            Resource: '*'
+          Version: '2012-10-17'
+        PolicyName: AWS-EnableCloudTrail
+      RoleName: SSMAutomationEnableCloudTrailRole
+    Type: AWS::IAM::Role
+  EnableS3BucketEncryptionRole:
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+        - Action:
+          - sts:AssumeRole
+          Effect: Allow
+          Principal:
+            Service:
+            - ssm.amazonaws.com
+        Version: '2012-10-17'
+      Description: SSM Automation Role for Document AWS-EnableS3BucketEncryption
+      MaxSessionDuration: '43200'
+      Policies:
+      - PolicyDocument:
+          Statement:
+          - Action: s3:PutBucketEncryption
+            Effect: Allow
+            Resource: '*'
+          Version: '2012-10-17'
+        PolicyName: AWS-EnableS3BucketEncryption
+      RoleName: SSMAutomationEnableS3BucketEncryptionRole
+    Type: AWS::IAM::Role
+  PublishSNSNotificationRole:
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+        - Action:
+          - sts:AssumeRole
+          Effect: Allow
+          Principal:
+            Service:
+            - ssm.amazonaws.com
+        Version: '2012-10-17'
+      Description: SSM Automation Role for Document AWS-PublishSNSNotification
+      MaxSessionDuration: '43200'
+      Policies:
+      - PolicyDocument:
+          Statement:
+          - Action: sns:Publish
+            Effect: Allow
+            Resource: '*'
+          Version: '2012-10-17'
+        PolicyName: AWS-PublishSNSNotification
+      RoleName: SSMAutomationPublishSNSNotificationRole
+    Type: AWS::IAM::Role
+  RebootRdsInstanceRole:
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+        - Action:
+          - sts:AssumeRole
+          Effect: Allow
+          Principal:
+            Service:
+            - ssm.amazonaws.com
+        Version: '2012-10-17'
+      Description: SSM Automation Role for Document AWS-RebootRdsInstance
+      MaxSessionDuration: '43200'
+      Policies:
+      - PolicyDocument:
+          Statement:
+          - Action: rds:RebootDBInstance
+            Effect: Allow
+            Resource: '*'
+          Version: '2012-10-17'
+        PolicyName: AWS-RebootRdsInstance
+      RoleName: SSMAutomationRebootRdsInstanceRole
+    Type: AWS::IAM::Role
+  ReleaseElasticIPRole:
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+        - Action:
+          - sts:AssumeRole
+          Effect: Allow
+          Principal:
+            Service:
+            - ssm.amazonaws.com
+        Version: '2012-10-17'
+      Description: SSM Automation Role for Document AWS-ReleaseElasticIP
+      MaxSessionDuration: '43200'
+      Policies:
+      - PolicyDocument:
+          Statement:
+          - Action: ec2:ReleaseAddress
+            Effect: Allow
+            Resource: '*'
+          Version: '2012-10-17'
+        PolicyName: AWS-ReleaseElasticIP
+      RoleName: SSMAutomationReleaseElasticIPRole
+    Type: AWS::IAM::Role
+  ResizeInstanceRole:
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+        - Action:
+          - sts:AssumeRole
+          Effect: Allow
+          Principal:
+            Service:
+            - ssm.amazonaws.com
+        Version: '2012-10-17'
+      Description: SSM Automation Role for Document AWS-ResizeInstance
+      MaxSessionDuration: '43200'
+      Policies:
+      - PolicyDocument:
+          Statement:
+          - Action: EC2:ModifyInstanceAttribute
+            Effect: Allow
+            Resource: '*'
+          Version: '2012-10-17'
+        PolicyName: AWS-ResizeInstance
+      RoleName: SSMAutomationResizeInstanceRole
+    Type: AWS::IAM::Role
+  StartRdsInstanceRole:
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+        - Action:
+          - sts:AssumeRole
+          Effect: Allow
+          Principal:
+            Service:
+            - ssm.amazonaws.com
+        Version: '2012-10-17'
+      Description: SSM Automation Role for Document AWS-StartRdsInstance
+      MaxSessionDuration: '43200'
+      Policies:
+      - PolicyDocument:
+          Statement:
+          - Action: rds:StartDBInstance
+            Effect: Allow
+            Resource: '*'
+          Version: '2012-10-17'
+        PolicyName: AWS-StartRdsInstance
+      RoleName: SSMAutomationStartRdsInstanceRole
+    Type: AWS::IAM::Role
+  StopRdsInstanceRole:
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+        - Action:
+          - sts:AssumeRole
+          Effect: Allow
+          Principal:
+            Service:
+            - ssm.amazonaws.com
+        Version: '2012-10-17'
+      Description: SSM Automation Role for Document AWS-StopRdsInstance
+      MaxSessionDuration: '43200'
+      Policies:
+      - PolicyDocument:
+          Statement:
+          - Action: rds:StopDBInstance
+            Effect: Allow
+            Resource: '*'
+          Version: '2012-10-17'
+        PolicyName: AWS-StopRdsInstance
+      RoleName: SSMAutomationStopRdsInstanceRole
+    Type: AWS::IAM::Role
+
+            
